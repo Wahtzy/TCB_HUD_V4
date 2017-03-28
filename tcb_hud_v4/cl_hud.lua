@@ -29,7 +29,7 @@ Settings.Color_Hunger 	= Color( 241, 196, 15, 255 )
 
 Settings.Show_Health 	= true
 Settings.Show_Armor		= true
-Settings.Show_Stamina 	= true
+Settings.Show_Stamina 	= false
 Settings.Show_Hunger 	= false
 
 
