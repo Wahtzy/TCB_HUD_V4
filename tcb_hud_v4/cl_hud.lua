@@ -17,6 +17,7 @@ Settings.Y 	= "bottom"	--> Top,	Center, Bottom.
 
 Settings.Color_Bg		= Color( 33, 33, 33, 255 )
 Settings.Color_Hg 		= Color( 70, 70, 70, 255 )
+Settings.Color_High		= Color( 222, 222, 222, 255 )
 
 Settings.Color_Divi		= Color( 34, 148, 230, 0 )
 
@@ -202,8 +203,8 @@ end
 local function HUD_Player()
 
 	--> Background
-	local edge = 2
-	draw.RoundedBox( 0, Settings.PosX+edge, Settings.PosY+edge, 80 + edge, 80 + edge, Settings.Color_Hg )
+	local edge = 0
+	draw.RoundedBox( 0, Settings.PosX+edge, Settings.PosY+edge, 80 + edge, 80 + edge, Settings.Color_High )
 
 end
 
@@ -743,3 +744,9 @@ local function TCB_V4_Paint()
 
 end
 hook.Add( "HUDPaint", "TCB_V4_Paint", TCB_V4_Paint )
+
+
+local Avatar = vgui.Create( "AvatarImage", Panel )
+Avatar:SetSize( 64, 64 )
+Avatar:SetPos( 4, 4 )
+Avatar:SetPlayer( LocalPlayer(), 64 )

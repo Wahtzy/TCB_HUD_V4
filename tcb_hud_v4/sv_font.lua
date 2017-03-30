@@ -9,4 +9,4 @@
 --[[---------------------------------------------------------
 	Name: Download Fonts
 -----------------------------------------------------------]]
-resource.AddFile( "resource/fonts/BebasNeue.otf" )
+--resource.AddFile( "resource/fonts/BebasNeue.otf" )
