@@ -15,18 +15,18 @@ local Settings = {}
 Settings.X 	= "left"	--> Left, 	Center, Right.
 Settings.Y 	= "bottom"	--> Top,	Center, Bottom.
 
-Settings.Color_Bg		= Color( 51, 51, 51, 255 )
-Settings.Color_Hg 		= Color( 78, 86, 86, 255 )
+Settings.Color_Bg		= Color( 33, 33, 33, 255 )
+Settings.Color_Hg 		= Color( 70, 70, 70, 255 )
 
-Settings.Color_Divi		= Color( 34, 148, 230, 255 )
+Settings.Color_Divi		= Color( 34, 148, 230, 0 )
 
-Settings.Color_Text1 	= Color( 34, 148, 230, 255 )
-Settings.Color_Text2 	= Color( 255, 255, 255, 255 )
+Settings.Color_Text1 	= Color( 222, 222, 222, 255 )
+Settings.Color_Text2 	= Color( 33, 33, 33, 255 )
 
-Settings.Color_Health 	= Color( 231, 76, 60, 255 )
-Settings.Color_Armor 	= Color( 52, 152, 219, 255 )
-Settings.Color_Stamina	= Color( 46, 204, 113, 255 )
-Settings.Color_Hunger 	= Color( 241, 196, 15, 255 )
+Settings.Color_Health 	= Color( 222, 222, 222, 255 )
+Settings.Color_Armor 	= Color( 222, 222, 222, 255 )
+Settings.Color_Stamina	= Color( 222, 222, 222, 255 )
+Settings.Color_Hunger 	= Color( 222, 222, 222, 255 )
 
 Settings.Show_Health 	= true
 Settings.Show_Armor		= false
@@ -37,7 +37,7 @@ Settings.Show_Hunger 	= false
 --[[---------------------------------------------------------
 	Name: Size
 -----------------------------------------------------------]]
-Settings.Width 	= 500
+Settings.Width 	= 400
 Settings.Height = 100
 
 
@@ -128,7 +128,7 @@ end
 
 
 --[[---------------------------------------------------------
-	Name: TextOverflow
+	Name: FormatNumber
 -----------------------------------------------------------]]
 function FormatNumber( n )
 
@@ -202,7 +202,8 @@ end
 local function HUD_Player()
 
 	--> Background
-	draw.RoundedBox( 0, Settings.PosX+10, Settings.PosY+10, 80, 80, Settings.Color_Hg )
+	local edge = 2
+	draw.RoundedBox( 0, Settings.PosX+edge, Settings.PosY+edge, 80 + edge, 80 + edge, Settings.Color_Hg )
 
 end
 
@@ -263,10 +264,15 @@ local function HUD_Info()
 
 	local Divider1_X	= Settings.PosX + 100
 	local Divider2_X	= Settings.PosX + 100 + Divider_W + 10
+	
+	local Info_X 		= Settings.PosX + 80 + 10
+	local Info_Y 		= Settings.PosY + 10 + 10
+	
+	local InfoSpacing 	= 28
 
 	--> Divider
-	draw.RoundedBox( 0, Divider1_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
-	draw.RoundedBox( 0, Divider2_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
+	--draw.RoundedBox( 0, Divider1_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
+	--draw.RoundedBox( 0, Divider2_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
 
 	--> Text Variables
 	local PlayerNameVar 	= LocalPlayer():Nick() or ""
@@ -280,11 +286,11 @@ local function HUD_Info()
 	local PlayerSalary 	= "$"..FormatNumber( PlayerSalaryVar )
 
 	--> Draw Text
-	draw.DrawText( PlayerName, 	"TCB_HUD_22", Divider1_X+(InfoWidth/2)/2, Divider_Y-24, Settings.Color_Text1, 1 )
-	draw.DrawText( PlayerJob, 	"TCB_HUD_24", Divider1_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 1 )
+	draw.DrawText( PlayerName, 	"TCB_HUD_22", Info_X, Info_Y, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerJob, 	"TCB_HUD_24", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
 
-	draw.DrawText( PlayerWallet, 	"TCB_HUD_22", Divider2_X+(InfoWidth/2)/2, Divider_Y-24, Settings.Color_Text1, 1 )
-	draw.DrawText( PlayerSalary, 	"TCB_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 1 )
+	draw.DrawText( PlayerWallet, 	"TCB_HUD_22", Info_X, Info_Y + (2 * InfoSpacing), Settings.Color_Text1, 0 )
+	--draw.DrawText( PlayerSalary, 	"TCB_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
 
 end
 

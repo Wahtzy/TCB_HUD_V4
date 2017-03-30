@@ -12,7 +12,7 @@
 local function CreateHUDFonts( i, font, name, weight )
 
 	--> Size
-	local CurrentFontSize = 12 + i * 2
+	local CurrentFontSize = 10 + i * 2
 
 	--> Create
 	surface.CreateFont( name .. CurrentFontSize, {
@@ -42,7 +42,7 @@ end
 -----------------------------------------------------------]]
 for i=1,6 do
 	
-	--> Crete Fonts
-	CreateHUDFonts( i, "BebasNeue", "TCB_HUD_", 100 )
+	--> Create Fonts
+	CreateHUDFonts( i, "Courier", "TCB_HUD_", 100 )
 
 end
