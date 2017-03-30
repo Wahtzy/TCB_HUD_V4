@@ -21,7 +21,7 @@ Upload the 'resource' folder to the main garry's mod directory 'garrysmod/'.
 
 STEP 2
 -------
-Upload the 'tcb_hud_v4' folder to the 'darkrp_modules' folder in 'garrysmod/addons/darkrpmodification/lua/'.
+Upload the 'watty_hud_01' folder to the 'darkrp_modules' folder in 'garrysmod/addons/darkrpmodification/lua/'.
 
 
 FIX 1

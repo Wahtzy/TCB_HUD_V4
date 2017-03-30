@@ -12,7 +12,7 @@
 local function CreateHUDFonts( i, font, name, weight )
 
 	--> Size
-	local CurrentFontSize = 10 + i * 2
+	local CurrentFontSize = 12 + i * 2
 
 	--> Create
 	surface.CreateFont( name .. CurrentFontSize, {

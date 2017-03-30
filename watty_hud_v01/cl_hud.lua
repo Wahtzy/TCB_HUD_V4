@@ -292,14 +292,14 @@ local function HUD_Info()
 	local PlayerWalletVar 	= LocalPlayer():getDarkRPVar( "money" ) or 0
 	local PlayerSalaryVar 	= LocalPlayer():getDarkRPVar( "salary" ) or 0
 
-	local PlayerName 	= TextOverflow( PlayerNameVar, 	"WATTY_HUD_24", InfoWidth/2 )
-	local PlayerJob		= TextOverflow( PlayerJobVar, 	"WATTY_HUD_24", InfoWidth/2 )
+	local PlayerName 	= TextOverflow( PlayerNameVar, 	"WATTY_HUD_22", InfoWidth/2 )
+	local PlayerJob		= TextOverflow( PlayerJobVar, 	"WATTY_HUD_20", InfoWidth/2 )
 	local PlayerWallet 	= "$"..FormatNumber( PlayerWalletVar )
 	local PlayerSalary 	= "$"..FormatNumber( PlayerSalaryVar )
 
 	--> Draw Text
 	draw.DrawText( PlayerName, 	"WATTY_HUD_22", Info_X, Info_Y, Settings.Color_Text1, 0 )
-	draw.DrawText( PlayerJob, 	"WATTY_HUD_24", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerJob, 	"WATTY_HUD_20", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
 
 	draw.DrawText( PlayerWallet, 	"WATTY_HUD_22", Info_X, Info_Y + (2 * InfoSpacing), Settings.Color_Text1, 0 )
 	--draw.DrawText( PlayerSalary, 	"WATTY_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
