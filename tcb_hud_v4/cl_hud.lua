@@ -248,14 +248,19 @@ local function PlayerModel()
 	end )
 
 end
+
 hook.Add( "InitPostEntity", "PlayerModel", PlayerModel )
 
+--[[---------------------------------------------------------
+	Name: Player Avatar
+-----------------------------------------------------------]]
 local function PlayerAvatar()
 	local Avatar = vgui.Create( "AvatarImage", Panel )
 	Avatar:SetSize( 64, 64 )
-	Avatar:SetPos( 4, 4 )
+	Avatar:SetPos( Settings.PosY+10, Settings.PosY+10 )
 	Avatar:SetPlayer( LocalPlayer(), 64 )
 end
+
 
 --[[---------------------------------------------------------
 	Name: Info Panel
@@ -727,6 +732,7 @@ local function TCB_V4_Paint()
 	HUD_Base()
 
 	HUD_Player()
+	PlayerAvatar()
 	HUD_Info()
 
 	if Settings.Show_Health 	then HUD_Health() 	end
