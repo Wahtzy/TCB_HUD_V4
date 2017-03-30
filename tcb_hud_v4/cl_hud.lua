@@ -204,7 +204,7 @@ local function HUD_Player()
 
 	--> Background
 	local edge = 0
-	draw.RoundedBox( 0, Settings.PosX+edge, Settings.PosY+edge, 80 + edge, 80 + edge, Settings.Color_High )
+	draw.RoundedBox( 0, Settings.PosX-edge, Settings.PosY-edge, 80 + (edge*2), 80 + (edge*2), Settings.Color_High )
 
 end
 
@@ -250,6 +250,12 @@ local function PlayerModel()
 end
 hook.Add( "InitPostEntity", "PlayerModel", PlayerModel )
 
+local function PlayerAvatar()
+	local Avatar = vgui.Create( "AvatarImage", Panel )
+	Avatar:SetSize( 64, 64 )
+	Avatar:SetPos( 4, 4 )
+	Avatar:SetPlayer( LocalPlayer(), 64 )
+end
 
 --[[---------------------------------------------------------
 	Name: Info Panel
@@ -281,17 +287,17 @@ local function HUD_Info()
 	local PlayerWalletVar 	= LocalPlayer():getDarkRPVar( "money" ) or 0
 	local PlayerSalaryVar 	= LocalPlayer():getDarkRPVar( "salary" ) or 0
 
-	local PlayerName 	= TextOverflow( PlayerNameVar, 	"TCB_HUD_24", InfoWidth/2 )
-	local PlayerJob		= TextOverflow( PlayerJobVar, 	"TCB_HUD_24", InfoWidth/2 )
+	local PlayerName 	= TextOverflow( PlayerNameVar, 	"WATTY_HUD_24", InfoWidth/2 )
+	local PlayerJob		= TextOverflow( PlayerJobVar, 	"WATTY_HUD_24", InfoWidth/2 )
 	local PlayerWallet 	= "$"..FormatNumber( PlayerWalletVar )
 	local PlayerSalary 	= "$"..FormatNumber( PlayerSalaryVar )
 
 	--> Draw Text
-	draw.DrawText( PlayerName, 	"TCB_HUD_22", Info_X, Info_Y, Settings.Color_Text1, 0 )
-	draw.DrawText( PlayerJob, 	"TCB_HUD_24", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerName, 	"WATTY_HUD_22", Info_X, Info_Y, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerJob, 	"WATTY_HUD_24", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
 
-	draw.DrawText( PlayerWallet, 	"TCB_HUD_22", Info_X, Info_Y + (2 * InfoSpacing), Settings.Color_Text1, 0 )
-	--draw.DrawText( PlayerSalary, 	"TCB_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerWallet, 	"WATTY_HUD_22", Info_X, Info_Y + (2 * InfoSpacing), Settings.Color_Text1, 0 )
+	--draw.DrawText( PlayerSalary, 	"WATTY_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
 
 end
 
@@ -324,7 +330,7 @@ local function HUD_Health()
 	local DrawTextY = HealthDrawY+2
 
 	--> Text
-	draw.DrawText( DrawText, "TCB_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
+	draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 
 end
 
@@ -357,7 +363,7 @@ local function HUD_Armor()
 	local DrawTextY = ArmorDrawY+2
 
 	--> Text
-	draw.DrawText( DrawText, "TCB_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
+	draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 
 end
 
@@ -390,7 +396,7 @@ local function HUD_Stamina()
 	local DrawTextY = StaminaDrawY+2
 
 	--> Text
-	draw.DrawText( DrawText, "TCB_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
+	draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 
 end
 
@@ -423,7 +429,7 @@ local function HUD_Hunger()
 	local DrawTextY = HungerDrawY+2
 
 	--> Text
-	draw.DrawText( DrawText, "TCB_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
+	draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 
 end
 
@@ -744,9 +750,3 @@ local function TCB_V4_Paint()
 
 end
 hook.Add( "HUDPaint", "TCB_V4_Paint", TCB_V4_Paint )
-
-
-local Avatar = vgui.Create( "AvatarImage", Panel )
-Avatar:SetSize( 64, 64 )
-Avatar:SetPos( 4, 4 )
-Avatar:SetPlayer( LocalPlayer(), 64 )
