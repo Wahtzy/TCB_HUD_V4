@@ -1,10 +1,16 @@
 /*---------------------------------------------------------------------------
 	
-	Creator: TheCodingBeast - TheCodingBeast.com
+	By Wahtzy
+	Based on the works of: TheCodingBeast - TheCodingBeast.com
 	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. 
 	To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/
 	
 ---------------------------------------------------------------------------*/
+
+Disclaimer: This HUD is only a slightly modified version of TCB's hud. I only work on this to make it fit a friends server and for the 
+learning experience. Please check out TCB's work ----> TheCodingBeast.com
+
+
 
 
 STEP 1
