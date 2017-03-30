@@ -14,12 +14,12 @@ local Settings = {}
 Settings.X 	= "left"	--> Left, 	Center, Right.
 Settings.Y 	= "bottom"	--> Top,	Center, Bottom.
 
-Settings.Color_Bg		= Color( 238, 238, 238, 255 )
-Settings.Color_Hg 		= Color( 149, 165, 166, 255 )
+Settings.Color_Bg		= Color( 51, 51, 51, 255 )
+Settings.Color_Hg 		= Color( 78, 86, 86, 255 )
 
-Settings.Color_Divi		= Color( 230, 126, 34, 255 )
+Settings.Color_Divi		= Color( 34, 148, 230, 255 )
 
-Settings.Color_Text1 	= Color( 230, 126, 34, 255 )
+Settings.Color_Text1 	= Color( 34, 148, 230, 255 )
 Settings.Color_Text2 	= Color( 255, 255, 255, 255 )
 
 Settings.Color_Health 	= Color( 231, 76, 60, 255 )
@@ -28,7 +28,7 @@ Settings.Color_Stamina	= Color( 46, 204, 113, 255 )
 Settings.Color_Hunger 	= Color( 241, 196, 15, 255 )
 
 Settings.Show_Health 	= true
-Settings.Show_Armor		= true
+Settings.Show_Armor		= false
 Settings.Show_Stamina 	= false
 Settings.Show_Hunger 	= false
 
