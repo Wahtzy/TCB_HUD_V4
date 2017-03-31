@@ -268,7 +268,7 @@ local Money = Material( "icon/ic_money.png" )
 local function HUD_Info()
 
 	--> Variables
-	local InfoWidth 	= Settings.Width - 80 - 30
+	local InfoWidth 	= Settings.Width - 80
 	local InfoHeight 	= 60 + Edge
 	local InfoOffset	= 5
 	
