@@ -19,7 +19,9 @@ Settings.Color_Bg		= Color( 33, 33, 33, 255 )
 Settings.Color_Hg 		= Color( 70, 70, 70, 255 )
 Settings.Color_High		= Color( 222, 222, 222, 255 )
 
-Settings.Color_Divi		= Color( 34, 148, 230, 0 )
+Settings.Color_White 	= Color( 222, 222, 222, 255 )
+Settings.Color_Black	= Color( 33, 33, 33, 255 )
+Settings.Color_Grey		= Color( 70, 70, 70, 255 )
 
 Settings.Color_Text1 	= Color( 222, 222, 222, 255 )
 Settings.Color_Text2 	= Color( 33, 33, 33, 255 )
@@ -58,37 +60,13 @@ local HUDDrawHeight_Armor 	= 0
 local HUDDrawHeight_Stamina = 0
 local HUDDrawHeight_Hunger 	= 0
 
+local Valuta		= "Dkk"
 
-local edge = 2
+local AvatarSize 	= 80
+local Edge 			= 2
+local offset 		= 10-Edge
+local IconTray 		= 40
 
---> Hunger
-if Settings.Show_Hunger then 
-	HUDDrawHeight_Stamina = HUDDrawHeight_Stamina 	+ HudDrawHeight 
-	HUDDrawHeight_Armor	  = HUDDrawHeight_Armor		+ HudDrawHeight
-	HUDDrawHeight_Health  = HUDDrawHeight_Health	+ HudDrawHeight
-	HUDDrawHeight_Extra	  = HUDDrawHeight_Extra 	+ HudDrawHeight
-end
-
---> Stamina
-if Settings.Show_Stamina then 
-	HUDDrawHeight_Armor	  = HUDDrawHeight_Armor		+ HudDrawHeight
-	HUDDrawHeight_Health  = HUDDrawHeight_Health	+ HudDrawHeight
-	HUDDrawHeight_Extra	  = HUDDrawHeight_Extra 	+ HudDrawHeight
-end
-
---> Armor
-if Settings.Show_Armor then 
-	HUDDrawHeight_Health  = HUDDrawHeight_Health	+ HudDrawHeight
-	HUDDrawHeight_Extra	  = HUDDrawHeight_Extra 	+ HudDrawHeight
-end
-
---> Health
-if Settings.Show_Health then 
-	HUDDrawHeight_Extra	  = HUDDrawHeight_Extra 	+ HudDrawHeight
-end
-
---> Change Width & Height
-Settings.Height = Settings.Height + HUDDrawHeight_Extra
 
 --> X Pos
 if Settings.X 		== "left" then
@@ -197,7 +175,7 @@ hook.Add( "HUDShouldDraw", "HideElements", HideElements )
 local function HUD_Base()
 
 	--> Background
-	draw.RoundedBox( 0, Settings.PosX, Settings.PosY, Settings.Width, Settings.Height, Settings.Color_Bg )
+	draw.RoundedBox( 0, Settings.PosX, Settings.PosY, Settings.Width, Settings.Height, Settings.Color_Black )
 
 end
 
@@ -208,8 +186,7 @@ end
 local function HUD_Player()
 
 	--> Background
-	
-	draw.RoundedBox( 0, Settings.PosX+10, Settings.PosY+10, 80 + (edge*2), 80 + (edge*2), Settings.Color_High )
+	draw.RoundedBox( 0, Settings.PosX+offset, Settings.PosY+offset, 80 + (Edge*2), 80 + (Edge*2), Settings.Color_White )
 
 end
 
@@ -267,7 +244,7 @@ function HUDValidCheck()
         avatar= vgui.Create( "AvatarImage" )
     
         avatar:SetSize( 80, 80 )
-        avatar:SetPos( Settings.PosX+10+edge, Settings.PosY+10+edge )
+        avatar:SetPos( Settings.PosX+offset+Edge, Settings.PosY+offset+Edge )
         avatar:SetPlayer( LocalPlayer(), 80 )
     
     end
@@ -276,36 +253,29 @@ end
 
 
 if Settings.Show_Avatar then
-	hook.Add( "HUDPaint", "1943rphud", HUDValidCheck )
-	edge = 2
+	hook.Add( "HUDPaint", "WattyAvatar", HUDValidCheck )
+	Edge = 2
 else 
 	hook.Add( "InitPostEntity", "PlayerModel", PlayerModel )
-	edge = 0
+	Edge = 0
 end
 
 --[[---------------------------------------------------------
 	Name: Info Panel
 -----------------------------------------------------------]]
+local Person = Material( "icon/ic_person.png" )
+local Money = Material( "icon/ic_money.png" )
 local function HUD_Info()
 
 	--> Variables
 	local InfoWidth 	= Settings.Width - 80 - 30
-	local InfoHeight 	= 80
-
-	local Divider_Y 	= Settings.PosY + InfoHeight/2+10
-	local Divider_W 	= InfoWidth / 2 - 5
-
-	local Divider1_X	= Settings.PosX + 100
-	local Divider2_X	= Settings.PosX + 100 + Divider_W + 10
+	local InfoHeight 	= 60 + Edge
+	local InfoOffset	= 5
 	
-	local Info_X 		= Settings.PosX + 80 + 20
-	local Info_Y 		= Settings.PosY + 10
+	local Info_X 		= Settings.PosX + AvatarSize + IconTray
+	local Info_Y 		= Settings.PosY + InfoOffset
 	
-	local InfoSpacing 	= 24
-
-	--> Divider
-	--draw.RoundedBox( 0, Divider1_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
-	--draw.RoundedBox( 0, Divider2_X, Divider_Y, Divider_W, 2, Settings.Color_Divi )
+	local InfoSpacing 	= 20
 
 	--> Text Variables
 	local PlayerNameVar 	= LocalPlayer():Nick() or ""
@@ -315,15 +285,22 @@ local function HUD_Info()
 
 	local PlayerName 	= TextOverflow( PlayerNameVar, 	"WATTY_HUD_18", InfoWidth/2 )
 	local PlayerJob		= TextOverflow( PlayerJobVar, 	"WATTY_HUD_16", InfoWidth/2 )
-	local PlayerWallet 	= "$"..FormatNumber( PlayerWalletVar )
-	local PlayerSalary 	= "$"..FormatNumber( PlayerSalaryVar )
+	local PlayerWallet 	= Valuta..FormatNumber( PlayerWalletVar )
+	local PlayerSalary 	= FormatNumber( PlayerSalaryVar )
 
 	--> Draw Text
-	draw.DrawText( PlayerName, 	"WATTY_HUD_18", Info_X, Info_Y, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerName, 	"WATTY_HUD_22", Info_X, Info_Y, Settings.Color_Text1, 0 )
 	draw.DrawText( PlayerJob, 	"WATTY_HUD_16", Info_X, Info_Y + InfoSpacing, Settings.Color_Text1, 0 )
-
-	draw.DrawText( PlayerWallet, 	"WATTY_HUD_16", Info_X, Info_Y + (2 * InfoSpacing), Settings.Color_Text1, 0 )
-	--draw.DrawText( PlayerSalary, 	"WATTY_HUD_24", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
+	draw.DrawText( PlayerWallet.." ("..PlayerSalary..")", 	"WATTY_HUD_16", Info_X, Info_Y + InfoHeight - InfoOffset, Settings.Color_Text1, 0 )
+	--draw.DrawText( PlayerSalary, 	"WATTY_HUD_16", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
+	
+	--> Draw icon
+	surface.SetMaterial( Person )
+	surface.SetDrawColor( 255, 255, 255, 255 )
+	surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + 5, 12, 12)
+	surface.SetMaterial( Money )
+	surface.SetDrawColor( 255, 255, 255, 255 )
+	surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + InfoHeight - InfoOffset + 1, 12, 12)
 
 end
 
@@ -331,32 +308,40 @@ end
 --[[---------------------------------------------------------
 	Name: Health Panel
 -----------------------------------------------------------]]
+local Heart = Material( "icon/ic_heart.png" )
 local function HUD_Health()
 
 	--> Variables
-	local HealthDrawY = Settings.PosY + Settings.Height - 32 - HUDDrawHeight_Health
+	local DrawHeight 	= 10
+	local HealthDrawY 	= Settings.PosY + Settings.Height - (offset + DrawHeight)
+	local HealthDrawX 	= Settings.PosX + AvatarSize + IconTray
+	local DrawWidth 	= Settings.Width - HealthDrawX
 
 	--> Background
-	draw.RoundedBox( 0, Settings.PosX+10, HealthDrawY, Settings.Width - 20, 22, Settings.Color_Hg )
+	draw.RoundedBox( 0, HealthDrawX, HealthDrawY, DrawWidth, DrawHeight, Settings.Color_Grey )
 
 	--> Draw
 	local DrawValue	= LocalPlayer():Health() or 0
 	local EchoValue	= LocalPlayer():Health() or 0
-	local DrawWidth = Settings.Width - 20
-
-	if DrawValue < 0 then DrawValue = 0 elseif DrawValue > 100 then DrawValue = 100 end
-
+	
+	--if DrawValue < 0 then DrawValue = 0 elseif DrawValue > 100 then DrawValue = 100 end
+	DrawValue = math.Clamp( DrawValue, 0, 100 )
+	
 	if DrawValue != 0 then
-		draw.RoundedBox( 0, Settings.PosX+10, HealthDrawY, DrawWidth * DrawValue / 100, 22, Settings.Color_Health )
+		draw.RoundedBox( 0, HealthDrawX, HealthDrawY, DrawWidth * DrawValue / 100, DrawHeight, Settings.Color_White )
 	end
+	
+	surface.SetMaterial( Heart )
+	surface.SetDrawColor( 255, 255, 255, 255 )
+	surface.DrawTexturedRect( HealthDrawX - (IconTray/2) - 1, HealthDrawY - 1, 12, 12)
 
 	--> Text Variables
-	local DrawText 	= "Health: "..EchoValue.."%"
-	local DrawTextX = Settings.PosX+DrawWidth/2
-	local DrawTextY = HealthDrawY+2
+	--local DrawText 	= "Health: "..EchoValue.."%"
+	--local DrawTextX = Settings.PosX+DrawWidth/2
+	--local DrawTextY = HealthDrawY+2
 
 	--> Text
-	draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
+	--draw.DrawText( DrawText, "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 
 end
 
@@ -472,16 +457,17 @@ end
 --[[---------------------------------------------------------
 	Name: GunLicense
 -----------------------------------------------------------]]
-local Page = Material( "icon16/page_white_text.png" )
+local Page = Material( "icon/ic_page.png" )
 local function GunLicense()
 	if LocalPlayer():getDarkRPVar( "HasGunlicense" ) then
 
 		surface.SetMaterial( Page )
 		surface.SetDrawColor( 255, 255, 255, 255 )
-		surface.DrawTexturedRect( Settings.PosX + Settings.Width + 10, Settings.PosY + Settings.Height - 32, 32, 32)
+		surface.DrawTexturedRect( Settings.PosX + Settings.Width - 22, Settings.PosY + 22, 12, 12)
 
 	end
 end
+
 
 
 --[[---------------------------------------------------------
@@ -695,7 +681,7 @@ local function DrawEntityDisplay()
 
 		if GAMEMODE.Config.globalshow then
 			ply:drawPlayerInfo()
-		-- Draw when you're (almost) looking at him
+		-- Draw when you're (almost) looking at player
 		elseif hisPos:DistToSqr(shootPos) < 160000 then
 			local pos = hisPos - shootPos
 			local unitPos = pos:GetNormalized()
