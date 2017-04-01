@@ -43,6 +43,6 @@ end
 for i=1,6 do
 	
 	--> Create Fonts
-	CreateHUDFonts( i, "Courier New", "WATTY_HUD_", 100 )
+	CreateHUDFonts( i, "Cabin", "WATTY_HUD_", 100 )
 
 end

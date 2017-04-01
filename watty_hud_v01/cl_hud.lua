@@ -19,14 +19,18 @@ Settings.Color_Bg		= Color( 33, 33, 33, 255 )
 Settings.Color_Hg 		= Color( 70, 70, 70, 255 )
 Settings.Color_High		= Color( 222, 222, 222, 255 )
 
-Settings.Color_White 	= Color( 222, 222, 222, 255 )
-Settings.Color_Black	= Color( 33, 33, 33, 255 )
-Settings.Color_Grey		= Color( 70, 70, 70, 255 )
+--Settings.Color_White 	= Color( 222, 222, 222, 255 )
+--Settings.Color_Black	= Color( 33, 33, 33, 255 )
+--Settings.Color_Grey		= Color( 70, 70, 70, 255 )
+
+Settings.Color_White 	= Color( 0, 255, 115, 255 )
+Settings.Color_Black	= Color( 250, 25, 250, 255 )
+Settings.Color_Grey		= Color( 135, 80, 165, 255 )
 
 Settings.Color_Text1 	= Color( 222, 222, 222, 255 )
 Settings.Color_Text2 	= Color( 33, 33, 33, 255 )
 
-Settings.Color_Health 	= Color( 222, 222, 222, 255 )
+Settings.Color_Health 	= Color( 255, 147, 250, 255 )
 Settings.Color_Armor 	= Color( 222, 222, 222, 255 )
 Settings.Color_Stamina	= Color( 222, 222, 222, 255 )
 Settings.Color_Hunger 	= Color( 222, 222, 222, 255 )
@@ -295,12 +299,15 @@ local function HUD_Info()
 	--draw.DrawText( PlayerSalary, 	"WATTY_HUD_16", Divider2_X+(InfoWidth/2)/2, Divider_Y+4, Settings.Color_Text1, 0 )
 	
 	--> Draw icon
-	surface.SetMaterial( Person )
-	surface.SetDrawColor( 255, 255, 255, 255 )
-	surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + 5, 12, 12)
-	surface.SetMaterial( Money )
-	surface.SetDrawColor( 255, 255, 255, 255 )
-	surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + InfoHeight - InfoOffset + 1, 12, 12)
+	--surface.SetMaterial( Person )
+	--surface.SetDrawColor( 255, 255, 255, 255 )
+	--surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + 5, 12, 12)
+	draw.RoundedBox( 3, Info_X - (IconTray/2) + 2, Info_Y + 4, 6, 6, Settings.Color_White )
+	draw.RoundedBox( 3, Info_X - (IconTray/2), Info_Y + 10, 10, 6, Settings.Color_White )
+	--surface.SetMaterial( Money )
+	--surface.SetDrawColor( 255, 255, 255, 255 )
+	--surface.DrawTexturedRect( Info_X - (IconTray/2) - 1, Info_Y + InfoHeight - InfoOffset + 1, 12, 12)
+	draw.DrawText( "$", "WATTY_HUD_18", Info_X - (IconTray/2), Info_Y + InfoHeight - InfoOffset - 1, Settings.Color_Text1, 0 )
 
 end
 
@@ -331,10 +338,12 @@ local function HUD_Health()
 		draw.RoundedBox( 0, HealthDrawX, HealthDrawY, DrawWidth * DrawValue / 100, DrawHeight, Settings.Color_White )
 	end
 	
-	surface.SetMaterial( Heart )
-	surface.SetDrawColor( 255, 255, 255, 255 )
-	surface.DrawTexturedRect( HealthDrawX - (IconTray/2) - 1, HealthDrawY - 1, 12, 12)
-
+	--surface.SetMaterial( Heart )
+	--surface.SetDrawColor( 255, 255, 255, 255 )
+	--surface.DrawTexturedRect( HealthDrawX - (IconTray/2) - 1, HealthDrawY - 1, 12, 12)
+	
+	draw.RoundedBox( 5, HealthDrawX - (IconTray/2), HealthDrawY, 10, 10, Settings.Color_Health )
+	
 	--> Text Variables
 	--local DrawText 	= "Health: "..EchoValue.."%"
 	--local DrawTextX = Settings.PosX+DrawWidth/2
@@ -733,7 +742,7 @@ usermessage.Hook("_Notify", DisplayNotify)
 --[[---------------------------------------------------------
 	Name: HUD Paint
 -----------------------------------------------------------]]
-local function TCB_V4_Paint()
+local function WattyHUD_Paint()
 
 	--> Custom Elements
 	HUD_Base()
@@ -761,4 +770,4 @@ local function TCB_V4_Paint()
 
 
 end
-hook.Add( "HUDPaint", "TCB_V4_Paint", TCB_V4_Paint )
+hook.Add( "HUDPaint", "WattyHUD_Paint", WattyHUD_Paint )

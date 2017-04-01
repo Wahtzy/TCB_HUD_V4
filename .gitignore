@@ -1,0 +1,9 @@
+#Addon stuff
+*.jpeg
+addon.json
+
+
+#Tempfiles
+materials/*
+resource/fonts/cour.ttf
+resource/fonts/BebasNeue.otf
