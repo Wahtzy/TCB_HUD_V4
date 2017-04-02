@@ -19,18 +19,16 @@ Settings.Color_Bg		= Color( 33, 33, 33, 255 )
 Settings.Color_Hg 		= Color( 70, 70, 70, 255 )
 Settings.Color_High		= Color( 222, 222, 222, 255 )
 
---Settings.Color_White 	= Color( 222, 222, 222, 255 )
---Settings.Color_Black	= Color( 33, 33, 33, 255 )
---Settings.Color_Grey		= Color( 70, 70, 70, 255 )
+Settings.Color_White 	= Color( 222, 222, 222, 255 )
+Settings.Color_Black	= Color( 33, 33, 33, 255 )
+Settings.Color_Grey		= Color( 70, 70, 70, 255 )
 
-Settings.Color_White 	= Color( 0, 255, 115, 255 )
-Settings.Color_Black	= Color( 250, 25, 250, 255 )
-Settings.Color_Grey		= Color( 135, 80, 165, 255 )
+Settings.Color_Accent	= Color( 0, 153, 255, 255 )
 
 Settings.Color_Text1 	= Color( 222, 222, 222, 255 )
 Settings.Color_Text2 	= Color( 33, 33, 33, 255 )
 
-Settings.Color_Health 	= Color( 255, 147, 250, 255 )
+Settings.Color_Health 	= Color( 255, 73, 73, 255 )
 Settings.Color_Armor 	= Color( 222, 222, 222, 255 )
 Settings.Color_Stamina	= Color( 222, 222, 222, 255 )
 Settings.Color_Hunger 	= Color( 222, 222, 222, 255 )
@@ -180,6 +178,7 @@ local function HUD_Base()
 
 	--> Background
 	draw.RoundedBox( 0, Settings.PosX, Settings.PosY, Settings.Width, Settings.Height, Settings.Color_Black )
+	draw.RoundedBox( 0, Settings.PosX - 2, Settings.PosY, 2, Settings.Height, Settings.Color_Accent )
 
 end
 
@@ -272,7 +271,7 @@ local Money = Material( "icon/ic_money.png" )
 local function HUD_Info()
 
 	--> Variables
-	local InfoWidth 	= Settings.Width - 80
+	local InfoWidth 	= Settings.Width - 30
 	local InfoHeight 	= 60 + Edge
 	local InfoOffset	= 5
 	
@@ -466,14 +465,16 @@ end
 --[[---------------------------------------------------------
 	Name: GunLicense
 -----------------------------------------------------------]]
-local Page = Material( "icon/ic_page.png" )
+--local Page = Material( "icon/ic_page.png" )
 local function GunLicense()
 	if LocalPlayer():getDarkRPVar( "HasGunlicense" ) then
 
-		surface.SetMaterial( Page )
-		surface.SetDrawColor( 255, 255, 255, 255 )
-		surface.DrawTexturedRect( Settings.PosX + Settings.Width - 22, Settings.PosY + 22, 12, 12)
-
+		--surface.SetMaterial( Page )
+		--surface.SetDrawColor( 255, 255, 255, 255 )
+		--surface.DrawTexturedRect( Settings.PosX + Settings.Width - 22, Settings.PosY + 22, 12, 12)
+		
+		draw.RoundedBox( 0, Settings.PosX + Settings.Width - 10, Settings.PosY, 20, Settings.Height, Settings.Color_Health )
+		--draw.DrawText( "License", "WATTY_HUD_18", DrawTextX, DrawTextY, Settings.Color_Text2, 1 )
 	end
 end
 
